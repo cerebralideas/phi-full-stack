@@ -1,0 +1,9 @@
+# Ignore OS Files
+.DS_Store
+
+# Ignore PHP and WebStorm Files
+.idea
+
+# Ignore Sass cache
+.sass-cache
+public/.sass-cache
