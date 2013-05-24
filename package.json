@@ -1,0 +1,27 @@
+{
+  "name": "phi-full-stack",
+  "author": {
+    "name": "Justin Lowery, Cerebral Ideas",
+    "email": "info@cerebralideas.com"
+  },
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.0.x",
+    "jade": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib": "~0.6.1",
+    "grunt-markdown": "~0.2.0",
+    "grunt-macreload": "~0.1.3"
+  },
+  "analyze": false,
+  "readmeFilename": "README.md",
+  "description": "The tech stack for the full front to back architecture.",
+  "dist": {
+    "shasum": "e25bf18fecbaa452482ec49eb15909cfa8a95fed"
+  }
+}
