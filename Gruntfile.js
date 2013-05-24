@@ -10,20 +10,14 @@ module.exports = function(grunt) {
 		lint: {
 			files: [
 				'Gruntfile.js',
-				'test/**/*.js',
-				'src/js/*.js',
-				'src/js/**/*.js'
+				'app.js',
+				'routes/*.js'
 			]
 		},
 		concat: {
 			main: {
-				src: 'src/js/main.js',
-				dest: 'dev/js/main.js',
-				separator: '\n\n;// End file\n\n'
-			},
-			custom: {
-				src: 'src/js/plugins-custom/*.js',
-				dest: 'dev/js/custom.concat.js',
+				src: '',
+				dest: '',
 				separator: '\n\n;// End file\n\n'
 			}
 		},
@@ -45,11 +39,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			files: [
-				'<%= lint.files %>',
-				'phi/ui-ix/*.scss',
-				'phi/ui-ix/core/**/*.scss',
-				'phi/ui-ix/extensions/**/*.scss',
-				'src/sass/*.scss'
+				'<%= lint.files %>'
 			],
 			tasks: 'default'
 		},
@@ -69,33 +59,9 @@ module.exports = function(grunt) {
 				devel: true,
 				browser: true
 			},
-			globals: {
-				jQuery: true,
-				$: true,
-				PAS: true,
-				DATA: true,
-				PHI: true,
-				Modernizr: true,
-				angular: true,
-				require: true
-			}
+			globals: {}
 		},
 		uglify: {},
-		compass: {
-			prod: {
-				options: {
-					sassDir: 'src/sass',
-					cssDir: 'dist/css',
-					environment: 'production'
-				}
-			},
-			dev: {
-				options: {
-					sassDir: 'src/sass',
-					cssDir: 'dev/css'
-				}
-			}
-		},
 		macreload: {
 			reload: {
 				browser: 'canary'
@@ -113,9 +79,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-macreload');
 
 	// Default dev tasks for grunt.
-	grunt.registerTask('default', ['concat', 'compass:dev', 'macreload']);
+	grunt.registerTask('default', ['lint', 'macreload']);
 
 	// Production build task.
-	grunt.registerTask('build', ['concat', 'markdown', 'min', 'compass-clean', 'compass:prod', 'macreload']);
+	grunt.registerTask('build', ['lint', 'concat', 'min', 'markdown', 'macreload']);
 
 };
