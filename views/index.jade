@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	div.rowMain
+		h1= title
+		p Welcome to #{title}
+		if(!authorized)
+			a.button.default(href='login') Login
+		a.button.primary(href='/users') Add Users

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	div.rowMain
+		h1= title
+		p Add a user by entering an email and password or select a user to edit. Sample confirmation email sent after.
+		form(action=path, method='post')
+			fieldset
+				- var user = user || {email:'', password: ''}, returnPath = returnPath || '/';
+				div.row
+					div.sixColumns
+						label(for='email') Email
+						input#email(type='email', name='email', value=user.email)
+					div.sixColumns
+						label(for='password') Password
+						input#password(type='password', name='password', value=user.password)
+				div.twelveColumns.right
+					a.button.default(href=returnPath) Cancel
+					button.button.primary(type='submit') Submit
+					if(user.canDelete)
+						a.button.alert(href='/users/' + user._id.toString() + '/delete') Delete
+		hr
+		if (typeof users !== 'undefined')
+			h2 Users
+			ul.twelveColumns
+				each user in users
+					li
+						a(href='/users/' + user._id.toString())= user.email
+		
+
+
+
