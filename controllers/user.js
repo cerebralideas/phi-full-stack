@@ -26,6 +26,7 @@ exports.list = function(req, res){
 // Show login form if logged out GET
 
 exports.login = function(req, res){
+	// Helper to create first db user on login
 	// var User = require('../models/user'),
 	// user = new User({
 	// 			email: 'root@foo.bar', 
@@ -33,7 +34,7 @@ exports.login = function(req, res){
 	// 		});
 
 	// user.save();
-	
+
 	if(!req.isAuthenticated()) {
 		res.render('./users', { 
 			title: 'Login!',
