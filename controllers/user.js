@@ -26,6 +26,14 @@ exports.list = function(req, res){
 // Show login form if logged out GET
 
 exports.login = function(req, res){
+	// var User = require('../models/user'),
+	// user = new User({
+	// 			email: 'root@foo.bar', 
+	// 			password: 'foo'
+	// 		});
+
+	// user.save();
+	
 	if(!req.isAuthenticated()) {
 		res.render('./users', { 
 			title: 'Login!',
@@ -37,7 +45,7 @@ exports.login = function(req, res){
 	}
 	else {
 		res.redirect('/users');
-	}
+	};
 };
 
 // Edit User GET
