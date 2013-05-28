@@ -1,36 +1,43 @@
 extends layout
 
 block content
-	div.rowMain
-		h1= title
-		p Add an article by entering in markdown or select an article to edit.
-		form(action=path, method='post')
-			fieldset
+	div.row
+		div.twelveColumns
+			form(action=path, method='post')
 				- var article = article || {body:'', title: ''}, returnPath = returnPath || '/';
 				div.row
+					p.elevenColumns Add an article by entering in markdown or select an article to edit.
 					div.sixColumns
 						label(for='articleTitle') Article Title
-						input#articleTitle(type="text", name='articleTitle', value=article.title)
-				div.row
+						input#articleTitle(type='text', name='articleTitle', value=article.title)
+				div.row(ng-app, ng-controller='ArticleCtrl')
 					div.sixColumns
 						label(for='articleBody') Article in markdown
-						textarea#articleBody(name='articleBody', style='min-height:300px')= article.body
-					div.sixColumns
-						h1 render
-						h2 adsf
+						textarea#articleBody(ng-model='articleMarkdown', ng-change='markdownConvert()', ng-init='markdownConvert()', name='articleBody', style='min-height:300px')
+					div.sixColumns#markdownOutput(ng-bind-html-unsafe='convertedMarkdown')
+						{{convertedMarkdown}}
 				div.twelveColumns.right
 					a.button.default(href=returnPath) Cancel
 					button.button.primary(type='submit') Submit
 					if(article.canDelete)
 						a.button.alert(href='/articles/' + article._id.toString() + '/delete') Delete
-		hr
-		if (typeof articles !== 'undefined' && articles.length)
-			h2 Articles
-			ul.twelveColumns
-				each article in articles
-					li
-						a(href='/articles/' + article._id.toString())= article.title
-		
+		div.twelveColumns
+			hr
+			if (typeof articles !== 'undefined' && articles.length)
+				h2 Articles
+				ul.twelveColumns
+					each article in articles
+						li
+							a(href='/articles/' + article._id.toString())= article.title
+	script(type="text/javascript", src='/src/js/angular.js')
+	script(type="text/javascript", src='/src/js/showdown.js')
+	script
+		function ArticleCtrl($scope) {
+			$scope.convertedMarkdown = '';
+			$scope.articleMarkdown = unescape('#{article.body}');
 
-
-
+			$scope.markdownConvert = function() {
+				var converter = new Showdown.converter();
+				$scope.convertedMarkdown = converter.makeHtml($scope.articleMarkdown);
+			}
+		}	

@@ -6,6 +6,7 @@
 
 var express = require('express')
 	, routes = require('./controllers')
+	, auth = require('./controllers/authorization')
 	, users = require('./controllers/user')
 	, articles = require('./controllers/article')
 	, passport = require('passport')
@@ -56,7 +57,7 @@ require('./config/passport')(passport);
 
 app.get('/', routes.index);
 
-app.get('/login', users.login);
+app.get('/login', auth.login);
 app.post('/login', 
 	passport.authenticate('local', 
 		{	successRedirect: '/',
@@ -65,13 +66,13 @@ app.post('/login',
 		})
 );
 
-app.get('/users', users.authorized, users.list);
-app.get('/users/:userid', users.authorized, users.editUser);
-app.get('/users/:userid/delete', users.authorized, users.deleteUser);
+app.get('/users', auth.authorized, users.list);
+app.get('/users/:userid', auth.authorized, users.editUser);
+app.get('/users/:userid/delete', auth.authorized, users.deleteUser);
 
-app.post('/createuser', users.authorized, users.createUser);
-app.post('/updateuser/:userid', users.authorized, users.updateUser);
-app.post('/users/:userid/deleteuser', users.authorized, users.deleteUserConfirmed);
+app.post('/createuser', auth.authorized, users.createUser);
+app.post('/updateuser/:userid', auth.authorized, users.updateUser);
+app.post('/users/:userid/deleteuser', auth.authorized, users.deleteUserConfirmed);
 
 app.get('/articles', articles.list);
 app.get('/articles/:articleid', articles.editArticle);

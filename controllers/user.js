@@ -1,12 +1,3 @@
-// Check if user is currently authenticated - GET
-
-exports.authorized = function (req, res, next) {
-	if (!req.isAuthenticated()) {
-		return res.redirect('/login');
-	}
-	next();
-};
-
 // List of all users GET
 
 exports.list = function(req, res){
@@ -15,38 +6,12 @@ exports.list = function(req, res){
 			res.render('./users', { 
 				title: 'Add Users!',
 				path: '/createuser',
-				users: users
+				users: users,
+				authorized: req.isAuthenticated(),
 			})
 		}
 
 	User.getUser(null, callback);
-};
-
-
-// Show login form if logged out GET
-
-exports.login = function(req, res){
-	// Helper to create first db user on login
-	// var User = require('../models/user'),
-	// user = new User({
-	// 			email: 'root@foo.bar', 
-	// 			password: 'foo'
-	// 		});
-
-	// user.save();
-
-	if(!req.isAuthenticated()) {
-		res.render('./users', { 
-			title: 'Login!',
-			path: '/login',
-			user: { email: 'root@foo.bar', 
-					password: 'foo'
-				}
-		});
-	}
-	else {
-		res.redirect('/users');
-	};
 };
 
 // Edit User GET
@@ -61,6 +26,7 @@ exports.editUser = function(req, res){
 				title: 'Edit ' + user.email + '!',
 				path: '/updateuser/' + user._id,
 				returnPath: '/users',
+				authorized: req.isAuthenticated(),
 				user: user
 			})
 		};
@@ -80,6 +46,7 @@ exports.deleteUser = function(req, res){
 				title: 'Delete ' + user.email + '?',
 				path: '/users/' + user._id + '/deleteuser',
 				returnPath: '/users',
+				authorized: req.isAuthenticated(),
 				user: user
 			})
 		};

@@ -1,12 +1,3 @@
-// Check if article is currently authenticated - GET
-
-exports.authorized = function (req, res, next) {
-	if (!req.isAuthenticated()) {
-		return res.redirect('/login');
-	}
-	next();
-};
-
 // List of all articles GET
 
 exports.list = function(req, res){
@@ -15,38 +6,12 @@ exports.list = function(req, res){
 			res.render('./articles', { 
 				title: 'Add Article!',
 				path: '/createarticle',
+				authorized: req.isAuthenticated(),
 				articles: articles
-			})
+			});
 		}
 
 	Article.getArticle(null, callback);
-};
-
-
-// Show login form if logged out GET
-
-exports.login = function(req, res){
-	// Helper to create first db article on login
-	// var Article = require('../models/article'),
-	// article = new Article({
-	// 			email: 'root@foo.bar', 
-	// 			password: 'foo'
-	// 		});
-
-	// article.save();
-
-	if(!req.isAuthenticated()) {
-		res.render('./articles', { 
-			title: 'Login!',
-			path: '/login',
-			article: { email: 'root@foo.bar', 
-					password: 'foo'
-				}
-		});
-	}
-	else {
-		res.redirect('/articles');
-	};
 };
 
 // Edit Article GET
@@ -62,6 +27,7 @@ exports.editArticle = function(req, res){
 				title: 'Edit ' + article.title + '!',
 				path: '/updatearticle/' + article._id,
 				returnPath: '/articles',
+				authorized: req.isAuthenticated(),
 				article: article
 			})
 		};
@@ -81,6 +47,7 @@ exports.deleteArticle = function(req, res){
 				title: 'Delete ' + article.email + '?',
 				path: '/articles/' + article._id + '/deletearticle',
 				returnPath: '/articles',
+				authorized: req.isAuthenticated(),
 				article: article
 			})
 		};
@@ -108,7 +75,7 @@ exports.createArticle = function(req, res) {
 	var Article = require('../models/article'),
 		article = new Article({
 			title: req.body.articleTitle, 
-			body: req.body.articleBody
+			body: escape(req.body.articleBody)
 		});
 
 	article.save(function(err) {
@@ -126,7 +93,7 @@ exports.updateArticle = function(req, res) {
 		id = req.params.articleid,
 		article = {
 			title: req.body.articleTitle, 
-			body: req.body.articleBody
+			body: escape(req.body.articleBody)
 		};
 
 	Article.findByIdAndUpdate(id, article, function(err, article) {

@@ -1,7 +1,23 @@
 doctype 5
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/dev/css/main.css')
-  body
-    block content
+	head
+		title= title
+		link(rel='stylesheet', href='/dev/css/main.css')
+	body
+		div.rowMain
+			div.row
+				div.twelveColumns
+					h1= title
+					nav
+						ul.inlineLinkList
+							li.navItem
+								a(href='/') Home
+							li.navItem
+								a(href='/articles') Articles
+							li.navItem
+								a(href='/users') Users
+							if(!authorized)
+								li.navItem 
+									a(href='login') Login
+			hr
+			block content
