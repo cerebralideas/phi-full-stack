@@ -7,6 +7,7 @@
 var express = require('express')
 	, routes = require('./controllers')
 	, users = require('./controllers/user')
+	, articles = require('./controllers/article')
 	, passport = require('passport')
 	, mongoose = require('mongoose')
 	, http = require('http')
@@ -71,6 +72,14 @@ app.get('/users/:userid/delete', users.authorized, users.deleteUser);
 app.post('/createuser', users.authorized, users.createUser);
 app.post('/updateuser/:userid', users.authorized, users.updateUser);
 app.post('/users/:userid/deleteuser', users.authorized, users.deleteUserConfirmed);
+
+app.get('/articles', articles.list);
+app.get('/articles/:articleid', articles.editArticle);
+app.get('/articles/:articleid/delete', articles.deleteArticle);
+
+app.post('/createarticle', articles.createArticle);
+app.post('/updatearticle/:articleid', articles.updateArticle);
+app.post('/articles/:articleid/deletearticle', articles.deleteArticleConfirmed);
 
 
 

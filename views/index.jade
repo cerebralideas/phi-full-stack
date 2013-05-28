@@ -2,8 +2,21 @@ extends layout
 
 block content
 	div.rowMain
-		h1= title
-		p Welcome to #{title}
-		if(!authorized)
-			a.button.default(href='login') Login
-		a.button.primary(href='/users') Add Users
+		div.row
+			div.twelveColumns
+				h1= title
+				nav
+					ul.inlineLinkList
+						li.navItem
+							a(href='/articles') Articles
+						li.navItem
+							a(href='/users') Add Users
+						if(!authorized)
+							li.navItem 
+								a(href='login') Login
+		//if (article)
+		div.row
+			div.sixColumns
+				h2 Article title
+				h3.subheader 23/23/2013
+				p This is a paragraph. Paragraphs are preset with a font size, line height and spacing to match the overall vertical rhythm. To show what a paragraph looks like this needs a little more content so, let's see… did you know that there are storms occurring on Jupiter that are larger than the Earth? That's pretty cool.

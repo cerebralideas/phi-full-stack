@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	div.rowMain
+		h1= title
+		p Add an article by entering in markdown or select an article to edit.
+		form(action=path, method='post')
+			fieldset
+				- var article = article || {body:'', title: ''}, returnPath = returnPath || '/';
+				div.row
+					div.sixColumns
+						label(for='articleTitle') Article Title
+						input#articleTitle(type="text", name='articleTitle', value=article.title)
+				div.row
+					div.sixColumns
+						label(for='articleBody') Article in markdown
+						textarea#articleBody(name='articleBody', style='min-height:300px')= article.body
+					div.sixColumns
+						h1 render
+						h2 adsf
+				div.twelveColumns.right
+					a.button.default(href=returnPath) Cancel
+					button.button.primary(type='submit') Submit
+					if(article.canDelete)
+						a.button.alert(href='/articles/' + article._id.toString() + '/delete') Delete
+		hr
+		if (typeof articles !== 'undefined' && articles.length)
+			h2 Articles
+			ul.twelveColumns
+				each article in articles
+					li
+						a(href='/articles/' + article._id.toString())= article.title
+		
+
+
+
