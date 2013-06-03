@@ -7,14 +7,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
-		lint: {
-			files: [
-				'Gruntfile.js',
-				'test/**/*.js',
-				'src/js/*.js',
-				'src/js/**/*.js'
-			]
-		},
 		concat: {
 			main: {
 				src: 'src/js/main.js',
@@ -49,6 +41,12 @@ module.exports = function(grunt) {
 			tasks: 'default'
 		},
 		jshint: {
+			files: [
+				'Gruntfile.js',
+				'test/**/*.js',
+				'src/js/*.js',
+				'src/js/**/*.js'
+			],
 			options: {
 				curly: true,
 				eqeqeq: true,
@@ -107,9 +105,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-macreload');
 
 	// Default dev tasks for grunt.
-	grunt.registerTask('default', ['lint', 'concat', 'compass:dev', 'macreload']);
+	grunt.registerTask('default', [ 'concat', 'compass:dev', 'macreload']);
 
 	// Production build task.
-	grunt.registerTask('build', ['lint', 'concat', 'markdown', 'min', 'compass-clean', 'compass:prod', 'macreload']);
+	grunt.registerTask('build', ['jshint', 'concat', 'markdown', 'min', 'compass-clean', 'compass:prod', 'macreload']);
 
 };

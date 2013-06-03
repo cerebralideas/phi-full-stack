@@ -7,7 +7,9 @@ var mongoose = require('mongoose'),
 
 userSchema.statics.getUser = function(id, callback) {
 	var promise = new Promise;
-	if (callback) promise.addBack(callback);
+	if (callback) {
+		promise.addBack(callback);
+	}
 	if (!id) {
 		id = {} // all users
 	}
