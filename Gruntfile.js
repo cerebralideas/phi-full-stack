@@ -40,7 +40,8 @@ module.exports = function(grunt) {
 			files: [
 				'Gruntfile.js',
 				'app.js',
-				'routes/*.js'
+				'models/*.js',
+				'controllers/*.js'
 			],
 			options: {
 				curly: true,
@@ -55,16 +56,17 @@ module.exports = function(grunt) {
 				eqnull: true,
 				strict: true,
 				devel: true,
-				browser: true
-			},
-			globals: {
-				jQuery: true,
-				$: true,
-				PHI: true,
-				Modernizr: true,
-				angular: true,
-				require: true,
-				define: true
+				browser: true,
+				node: true,
+				globals: {
+					jQuery: true,
+					$: true,
+					PHI: true,
+					Modernizr: true,
+					angular: true,
+					define: true,
+					escape: true
+				}
 			}
 		},
 		uglify: {},

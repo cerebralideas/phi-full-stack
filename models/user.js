@@ -6,18 +6,19 @@ var mongoose = require('mongoose'),
 	});
 
 userSchema.statics.getUser = function(id, callback) {
-	var promise = new Promise;
+	"use strict";
+	var promise = new Promise();
 	if (callback) {
 		promise.addBack(callback);
 	}
 	if (!id) {
-		id = {} // all users
+		id = {}; // all users
 	}
 	else {
-		id = {_id: id } // specific user
+		id = {_id: id }; // specific user
 	}
 	this.find(id, promise.resolve.bind(promise));
 	return promise;
-}
+};
 
 module.exports = mongoose.model('User', userSchema); 
