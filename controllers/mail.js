@@ -4,7 +4,7 @@ var nodemailer = require('nodemailer'),
 exports.generic = function() {
 
 	"use strict";
-	
+
 	var mailOptions = {
 		from: "Fred Foo ✔ <foo@blurdybloop.com>", // sender address
 		to: "bar@blurdybloop.com, baz@blurdybloop.com", // list of receivers
@@ -14,10 +14,13 @@ exports.generic = function() {
 	};
 
 	transport.sendMail(mailOptions, function(error, response) {
+
 		if (error) {
 			console.log(error);
-		} else {
+		} 
+		else {
 			console.log("Message sent: " + response.message);
 		}
+
 	});
 };

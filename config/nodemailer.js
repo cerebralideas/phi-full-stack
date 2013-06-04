@@ -1,5 +1,6 @@
 // Test nodemailer settings
 module.exports = function (nodemailer) {
+
 	var smtpTransport = nodemailer.createTransport("SMTP", {
 	    host: "mailtrap.io", // hostname
 	    secureConnection: false, // use SSL
@@ -9,5 +10,6 @@ module.exports = function (nodemailer) {
 	        pass: "bdbd8d74e0b62218"
 	    }
 	});
+	
 	return smtpTransport;
 };
