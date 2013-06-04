@@ -14,6 +14,9 @@
 		// Map out all "modules" to paths
 		paths: {
 
+			// Articles
+			'showdown': '/vendor-bower/showdown/compressed/showdown',
+
 			// Bower dependencies
 			'jquery': '/vendor-bower/jquery/jquery.min',
 
@@ -35,12 +38,31 @@
 	});
 
 	// Load in jQuery plugins
-	require(
-			['modal', 'tabs', 'alerts', 'core'],
+	require(['showdown'], function() {
 
-			function (modal, tabs, alerts, custom, core) {
+		angular.module('PHI', []);
 
-				// Do stuff :)
-			}
-	);
+		angular.module('PHI').controller('ArticleCtrlr', [
+
+			'$scope',
+
+			function ArticleCtrlr($scope) {
+
+				$scope.init = function() {
+					var articleBody = document.getElementById('articleBody');
+					$scope.articleMarkdown = articleBody.value;
+					$scope.markdownConvert();
+				};
+
+				$scope.convertedMarkdown = '';
+				$scope.markdownConvert = function() {
+					var converter = new Showdown.converter();
+					$scope.convertedMarkdown = converter.makeHtml($scope.articleMarkdown);
+				};
+
+			}]);
+
+		angular.bootstrap(document, ['PHI']);
+
+	});
 }());
