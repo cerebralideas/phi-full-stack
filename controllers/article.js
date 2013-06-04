@@ -1,7 +1,9 @@
 // List of all articles GET
 
 exports.list = function(req, res) {
+
 	"use strict";
+
 	var Article = require('../models/article'),
 		callback = function(err, articles) {
 			res.render('./articles', {
@@ -18,7 +20,9 @@ exports.list = function(req, res) {
 // Edit Article GET
 
 exports.editArticle = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.articleid,
 		Article = require('../models/article'),
 		callback = function(err, articles) {
@@ -40,7 +44,9 @@ exports.editArticle = function(req, res) {
 // Delete Article Confirm GET
 
 exports.deleteArticle = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.articleid,
 		Article = require('../models/article'),
 		callback = function(err, articles) {
@@ -61,7 +67,9 @@ exports.deleteArticle = function(req, res) {
 // Delete Article - POST
 
 exports.deleteArticleConfirmed = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.articleid,
 		Article = require('../models/article'),
 		callback = function(err, articles) {
@@ -76,7 +84,9 @@ exports.deleteArticleConfirmed = function(req, res) {
 // Create Article - POST
 
 exports.createArticle = function(req, res) {
+
 	"use strict";
+
 	var Article = require('../models/article'),
 		article = new Article({
 			title: req.body.articleTitle,
@@ -94,7 +104,9 @@ exports.createArticle = function(req, res) {
 // Update Article - POST
 
 exports.updateArticle = function(req, res) {
+
 	"use strict";
+	
 	var Article = require('../models/article'),
 		id = req.params.articleid,
 		article = {

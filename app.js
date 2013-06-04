@@ -69,10 +69,14 @@ app.post('/login',
 	failureFlash: false
 }));
 
+
+app.get('/createfirstuser', auth.createFirstUser);
+
 app.get('/users', auth.authorized, users.list);
 app.get('/users/:userid', auth.authorized, users.editUser);
 app.get('/users/:userid/delete', auth.authorized, users.deleteUser);
 
+app.post('/createuser', auth.authorized, users.createUser);
 app.post('/createuser', auth.authorized, users.createUser);
 app.post('/updateuser/:userid', auth.authorized, users.updateUser);
 app.post('/users/:userid/deleteuser', auth.authorized, users.deleteUserConfirmed);

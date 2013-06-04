@@ -6,7 +6,9 @@ var mongoose = require('mongoose'),
 	});
 
 userSchema.statics.getUser = function(id, callback) {
+
 	"use strict";
+	
 	var promise = new Promise();
 	if (callback) {
 		promise.addBack(callback);

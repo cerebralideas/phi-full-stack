@@ -3,7 +3,9 @@
 var markdown = require('marked');
 
 exports.index = function(req, res) {
+
 	"use strict";
+	
 	var Article = require('../models/article'),
 		callback = function(err, articles) {
 			res.render('./index', {

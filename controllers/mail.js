@@ -2,7 +2,9 @@ var nodemailer = require('nodemailer'),
 	transport = require('../config/nodemailer')(nodemailer);
 
 exports.generic = function() {
+
 	"use strict";
+	
 	var mailOptions = {
 		from: "Fred Foo ✔ <foo@blurdybloop.com>", // sender address
 		to: "bar@blurdybloop.com, baz@blurdybloop.com", // list of receivers

@@ -2,7 +2,9 @@
 
 
 exports.list = function(req, res) {
+
 	"use strict";
+
 	var User = require('../models/user'),
 		callback = function(err, users) {
 			res.render('./users', {
@@ -19,7 +21,9 @@ exports.list = function(req, res) {
 // Edit User GET
 
 exports.editUser = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.userid,
 		User = require('../models/user'),
 		callback = function(err, users) {
@@ -40,7 +44,9 @@ exports.editUser = function(req, res) {
 // Delete User Confirm GET
 
 exports.deleteUser = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.userid,
 		User = require('../models/user'),
 		callback = function(err, users) {
@@ -61,7 +67,9 @@ exports.deleteUser = function(req, res) {
 // Delete User - POST
 
 exports.deleteUserConfirmed = function(req, res) {
+
 	"use strict";
+
 	var id = req.params.userid,
 		User = require('../models/user'),
 		callback = function(err, users) {
@@ -76,7 +84,9 @@ exports.deleteUserConfirmed = function(req, res) {
 // Create User - POST
 
 exports.createUser = function(req, res) {
+
 	"use strict";
+
 	var User = require('../models/user'),
 		user = new User({
 			email: req.body.email,
@@ -94,7 +104,9 @@ exports.createUser = function(req, res) {
 // Update User - POST
 
 exports.updateUser = function(req, res) {
+
 	"use strict";
+	
 	var User = require('../models/user'),
 		id = req.params.userid,
 		user = {
