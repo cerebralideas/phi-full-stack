@@ -28,23 +28,45 @@ userSchema.statics.getUser = function(id, callback) {
 userSchema.methods = {
 
 	makeSalt: function() {
-		return Math.round((new Date().valueOf() * Math.random())) + ''
+		
+		"use strict";
+		
+		return Math.round((new Date().valueOf() * Math.random())) + '';
+	},
+
+	validPassword: function(plainText) {
+		
+		"use strict";
+
+		return this.encryptPassword(plainText) === this.hashed_password;
 	},
 
 	encryptPassword: function(password) {
-		if (!password) return ''
-		return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
+
+		"use strict";
+
+		if (!password) {
+			return '';
+		}
+		
+		return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
 	}
 };
 
 userSchema.virtual('password')
 	.set(function(password) {
-		this._password = password
-		this.salt = this.makeSalt()
-		this.hashed_password = this.encryptPassword(password)
+
+		"use strict";
+
+		this._password = password;
+		this.salt = this.makeSalt();
+		this.hashed_password = this.encryptPassword(password);
 	})
 	.get(function() { 
-		return this._password 
+
+		"use strict";
+
+		return this._password;
 	});
 
 
