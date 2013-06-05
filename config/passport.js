@@ -1,9 +1,11 @@
 // Passport with local authentication through email adress and plain text passwords
-var	LocalStrategy = require('passport-local').Strategy
-	, User = require('../models/user');
+var	LocalStrategy = require('passport-local').Strategy,
+	User = require('../models/user');
 
 module.exports = function (passport) {
 	
+	"use strict";
+
 	passport.serializeUser(function(user, done) {
 		done(null, user._id);
 	});
@@ -34,4 +36,4 @@ module.exports = function (passport) {
 			});
 		}
 	));
-}
+};

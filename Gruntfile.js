@@ -40,6 +40,7 @@ module.exports = function(grunt) {
 			files: [
 				'Gruntfile.js',
 				'app.js',
+				'config/*.js',
 				'models/*.js',
 				'controllers/*.js'
 			],

@@ -64,7 +64,7 @@ app.get('/', routes.index);
 app.get('/login', auth.login);
 app.post('/login',
 	passport.authenticate('local', {
-	successRedirect: '/',
+	successRedirect: '/users',
 	failureRedirect: '/login',
 	failureFlash: false
 }));
