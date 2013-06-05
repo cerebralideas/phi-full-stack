@@ -109,9 +109,13 @@ exports.updateUser = function(req, res) {
 	
 	var User = require('../models/user'),
 		id = req.params.userid,
-		user = {
+		changeduser = new User({
 			email: req.body.email,
 			password: req.body.password
+		}), user = {
+			email: req.body.email,
+			hashed_password: changeduser.hashed_password,
+			salt: changeduser.salt
 		};
 
 	User.findByIdAndUpdate(id, user, function(err, user) {
