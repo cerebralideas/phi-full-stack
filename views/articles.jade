@@ -1,8 +1,9 @@
 extends layout
-
-block content
+block scripts
 	script(type="text/javascript", src='/vendor-bower/angular/angular.min.js')
 	script(type="text/javascript", data-main='/src/js/main.js', src='/vendor-bower/requirejs/require.js')
+		
+block content
 	div.row
 		div.twelveColumns
 			form(action=path, method='post')
