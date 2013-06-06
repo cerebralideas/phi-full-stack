@@ -1,6 +1,8 @@
 extends layout
 
 block content
+	script(type="text/javascript", src='/vendor-bower/angular/angular.min.js')
+	script(type="text/javascript", data-main='/src/js/main.js', src='/vendor-bower/requirejs/require.js')
 	div.row
 		div.twelveColumns
 			form(action=path, method='post')
@@ -29,5 +31,3 @@ block content
 					each article in articles
 						li
 							a(href='/articles/' + article._id.toString())= article.title
-	script(type="text/javascript", src='/vendor-bower/angular/angular.min.js')
-	script(type="text/javascript", data-main='/src/js/main.js', src='/vendor-bower/requirejs/require.js')
