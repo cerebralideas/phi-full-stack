@@ -1,6 +1,7 @@
 // Check if user is currently authenticated - GET
 
 exports.authorized = function (req, res, next) {
+
 	if (!req.isAuthenticated()) {
 		return res.redirect('/login');
 	}
@@ -10,27 +11,30 @@ exports.authorized = function (req, res, next) {
 
 // Show login form if logged out GET
 
-exports.login = function(req, res){
+exports.login = function (req, res) {
+
 	// Helper to create first db user on login
 	// var User = require('../models/user'),
 	// user = new User({
-	// 			email: 'root@foo.bar', 
+	// 			email: 'root@foo.bar',
 	// 			password: 'foo'
 	// 		});
 
 	// user.save();
 
 	if(!req.isAuthenticated()) {
-		res.render('./users', { 
+
+		res.render('./users', {
+
 			title: 'Login!',
 			path: '/login',
 			authorized: req.isAuthenticated(),
-			user: { email: 'root@foo.bar', 
+			user: { email: 'root@foo.bar',
 					password: 'foo'
 				}
 		});
 	}
 	else {
 		res.redirect('/users');
-	};
+	}
 };
