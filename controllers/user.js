@@ -1,34 +1,41 @@
 // List of all users GET
 
-exports.list = function(req, res){
+
+exports.list = function(req, res) {
+
+	"use strict";
+
 	var User = require('../models/user'),
-		callback = function (err, users) {
-			res.render('./users', { 
+		callback = function(err, users) {
+			res.render('./users', {
 				title: 'Add Users!',
 				path: '/createuser',
 				users: users,
-				authorized: req.isAuthenticated(),
-			})
-		}
+				authorized: req.isAuthenticated()
+			});
+		};
 
 	User.getUser(null, callback);
 };
 
 // Edit User GET
 
-exports.editUser = function(req, res){
+exports.editUser = function(req, res) {
+
+	"use strict";
+
 	var id = req.params.userid,
 		User = require('../models/user'),
-		callback = function (err, users) {
+		callback = function(err, users) {
 			var user = users[0];
 			user.canDelete = true;
-			res.render('./users', { 
+			res.render('./users', {
 				title: 'Edit ' + user.email + '!',
 				path: '/updateuser/' + user._id,
 				returnPath: '/users',
 				authorized: req.isAuthenticated(),
 				user: user
-			})
+			});
 		};
 
 	User.getUser(id, callback);
@@ -36,19 +43,22 @@ exports.editUser = function(req, res){
 
 // Delete User Confirm GET
 
-exports.deleteUser = function(req, res){
+exports.deleteUser = function(req, res) {
+
+	"use strict";
+
 	var id = req.params.userid,
 		User = require('../models/user'),
-		callback = function (err, users) {
+		callback = function(err, users) {
 			var user = users[0];
 			user.deleteConfirm = true;
-			res.render('./users', { 
+			res.render('./users', {
 				title: 'Delete ' + user.email + '?',
 				path: '/users/' + user._id + '/deleteuser',
 				returnPath: '/users',
 				authorized: req.isAuthenticated(),
 				user: user
-			})
+			});
 		};
 
 	User.getUser(id, callback);
@@ -57,9 +67,12 @@ exports.deleteUser = function(req, res){
 // Delete User - POST
 
 exports.deleteUserConfirmed = function(req, res) {
-		var id = req.params.userid,
+
+	"use strict";
+
+	var id = req.params.userid,
 		User = require('../models/user'),
-		callback = function (err, users) {
+		callback = function(err, users) {
 			users[0].remove();
 			res.redirect('/users');
 		};
@@ -71,14 +84,17 @@ exports.deleteUserConfirmed = function(req, res) {
 // Create User - POST
 
 exports.createUser = function(req, res) {
+
+	"use strict";
+
 	var User = require('../models/user'),
 		user = new User({
-			email: req.body.email, 
+			email: req.body.email,
 			password: req.body.password
 		});
 
 	user.save(function(err) {
-		if(!err) {
+		if (!err) {
 			require('./mail').generic();
 			res.redirect('/users');
 		}
@@ -88,19 +104,25 @@ exports.createUser = function(req, res) {
 // Update User - POST
 
 exports.updateUser = function(req, res) {
+
+	"use strict";
+	
 	var User = require('../models/user'),
 		id = req.params.userid,
-		user = {
-			email: req.body.email, 
-			password: req.body.password,
+		changeduser = new User({
+			email: req.body.email,
+			password: req.body.password
+		}), user = {
+			email: req.body.email,
+			hashed_password: changeduser.hashed_password,
+			salt: changeduser.salt
 		};
 
 	User.findByIdAndUpdate(id, user, function(err, user) {
-		if(!err) {
+		if (!err) {
 			require('./mail').generic();
 			res.redirect('/users');
-		}
-		else {
+		} else {
 			res.redirect('/users/' + id);
 		}
 	});

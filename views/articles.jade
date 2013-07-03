@@ -1,5 +1,8 @@
 extends layout
-
+block scripts
+	script(type="text/javascript", src='/vendor-bower/angular/angular.min.js')
+	script(type="text/javascript", data-main='/src/js/main.js', src='/vendor-bower/requirejs/require.js')
+		
 block content
 	div.row
 		div.twelveColumns
@@ -10,10 +13,10 @@ block content
 					div.sixColumns
 						label(for='articleTitle') Article Title
 						input#articleTitle(type='text', name='articleTitle', value=article.title)
-				div.row(ng-app, ng-controller='ArticleCtrl')
+				div.row(ng-controller='ArticleCtrlr')
 					div.sixColumns
 						label(for='articleBody') Article in markdown
-						textarea#articleBody(ng-model='articleMarkdown', ng-change='markdownConvert()', ng-init='markdownConvert()', name='articleBody', style='min-height:300px')
+						textarea#articleBody(ng-model='articleMarkdown', ng-change='markdownConvert()', ng-init='init()', name='articleBody', style='min-height:300px')= unescape(article.body)
 					div.sixColumns#markdownOutput(ng-bind-html-unsafe='convertedMarkdown')
 						{{convertedMarkdown}}
 				div.twelveColumns.right
@@ -29,15 +32,3 @@ block content
 					each article in articles
 						li
 							a(href='/articles/' + article._id.toString())= article.title
-	script(type="text/javascript", src='/src/js/angular.js')
-	script(type="text/javascript", src='/src/js/showdown.js')
-	script
-		function ArticleCtrl($scope) {
-			$scope.convertedMarkdown = '';
-			$scope.articleMarkdown = unescape('#{article.body}');
-
-			$scope.markdownConvert = function() {
-				var converter = new Showdown.converter();
-				$scope.convertedMarkdown = converter.makeHtml($scope.articleMarkdown);
-			}
-		}	

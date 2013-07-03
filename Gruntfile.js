@@ -7,13 +7,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
-		lint: {
-			files: [
-				'Gruntfile.js',
-				'app.js',
-				'routes/*.js'
-			]
-		},
 		concat: {
 			main: {
 				src: '',
@@ -39,11 +32,18 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			files: [
-				'<%= lint.files %>'
+				'<%= jshint.files %>'
 			],
 			tasks: 'default'
 		},
 		jshint: {
+			files: [
+				'Gruntfile.js',
+				'app.js',
+				'config/*.js',
+				'models/*.js',
+				'controllers/*.js'
+			],
 			options: {
 				curly: true,
 				eqeqeq: true,
@@ -57,9 +57,18 @@ module.exports = function(grunt) {
 				eqnull: true,
 				strict: true,
 				devel: true,
-				browser: true
-			},
-			globals: {}
+				browser: true,
+				node: true,
+				globals: {
+					jQuery: true,
+					$: true,
+					PHI: true,
+					Modernizr: true,
+					angular: true,
+					define: true,
+					escape: true
+				}
+			}
 		},
 		uglify: {},
 		macreload: {
@@ -79,9 +88,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-macreload');
 
 	// Default dev tasks for grunt.
-	grunt.registerTask('default', ['lint', 'macreload']);
+	grunt.registerTask('default', ['jshint', 'macreload']);
 
 	// Production build task.
-	grunt.registerTask('build', ['lint', 'concat', 'min', 'markdown', 'macreload']);
+	grunt.registerTask('build', ['jshint', 'concat', 'min', 'markdown', 'macreload']);
 
 };
