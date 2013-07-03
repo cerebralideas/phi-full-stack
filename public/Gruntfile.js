@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			files: [
-				'<%= lint.files %>',
+				'<%= jshint.files %>',
 				'phi/ui-ix/*.scss',
 				'phi/ui-ix/core/**/*.scss',
 				'phi/ui-ix/extensions/**/*.scss',
@@ -67,9 +67,14 @@ module.exports = function(grunt) {
 					PHI: true,
 					Modernizr: true,
 					angular: true,
+<<<<<<< HEAD
 					require: true,
 					requirejs: true,
 					Showdown: true,
+=======
+					requirejs: true,
+					require: true,
+>>>>>>> 8a78e2cac6eb6eaa30cad15941a440eeb102adec
 					define: true
 				}
 			}
