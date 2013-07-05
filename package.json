@@ -1,7 +1,7 @@
 {
   "name": "phi-full-stack",
   "author": "Justin Lowery, Cerebral Ideas <info@cerebralideas.com>",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "scripts": {
     "start": "node app.js"
   },
@@ -15,11 +15,20 @@
     "passport-local": "~0.1.6"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib": "~0.6.1",
-    "grunt-markdown": "~0.2.0",
-    "grunt-macreload": "~0.1.3"
+	  "grunt": "~0.4.1",
+	  "grunt-macreload": "~0.1.3",
+	  "grunt-markdown": "~0.2.0",
+	  "grunt-contrib-clean": "~0.4.1",
+	  "grunt-contrib-copy": "~0.4.1",
+	  "grunt-contrib-htmlmin": "~0.1.3",
+	  "grunt-contrib-jshint": "~0.6.0",
+	  "grunt-contrib-watch": "~0.4.4"
   },
+	"sysDependencies": {
+		"node": "~0.8.23",
+		"npm": "~1.2.24",
+		"grunt-cli": "~0.1.9"
+	},
   "analyze": false,
   "readmeFilename": "README.md",
   "description": "The tech stack for the full front to back architecture.",
