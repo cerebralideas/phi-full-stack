@@ -1,3 +1,5 @@
+/*! phi-full-stack | Version: 0.0.1 | Concatenated on 2013-08-23 */
+
 (function () {
 
 	'use strict';
@@ -13,9 +15,6 @@
 
 		// Map out all "modules" to paths
 		paths: {
-
-			// Articles
-			'showdown': '/vendor-bower/showdown/compressed/showdown',
 
 			// Bower dependencies
 			'jquery': '/vendor-bower/jquery/jquery.min',
@@ -38,31 +37,22 @@
 	});
 
 	// Load in jQuery plugins
-	require(['showdown'], function() {
+	require(
+			[],
 
-		angular.module('PHI', []);
+			function () {
 
-		angular.module('PHI').controller('ArticleCtrlr', [
+				angular.module('FRIENDS').controller('FriendsCtrlr', [
 
-			'$scope',
+					'$scope', 'sectionData',
 
-			function ArticleCtrlr($scope) {
+					function FriendsCtrlr($scope, sectionData) {
+						$scope.friends = sectionData.friends;
 
-				$scope.init = function() {
-					var articleBody = document.getElementById('articleBody');
-					$scope.articleMarkdown = articleBody.value;
-					$scope.markdownConvert();
-				};
+					}
+				]);
 
-				$scope.convertedMarkdown = '';
-				$scope.markdownConvert = function() {
-					var converter = new Showdown.converter();
-					$scope.convertedMarkdown = converter.makeHtml($scope.articleMarkdown);
-				};
-
-			}]);
-
-		angular.bootstrap(document, ['PHI']);
-
-	});
+				angular.bootstrap(document, ['FRIENDS']);
+			}
+	);
 }());

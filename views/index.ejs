@@ -1,0 +1,26 @@
+<% layout('layout') -%>
+<script type="text/javascript">
+	angular.module('FRIENDS', []).factory('sectionData', [
+
+					function () {
+
+						'use strict';
+
+						var data = {};
+						data = <%- friends %>;
+
+						return data;
+					}
+				]);
+</script>
+<div data-ng-controller="FriendsCtrlr">
+	<h1><%= __('Hello') + ' ' + __('Friends') %></h1>
+	<ul>
+		<li data-ng-repeat="friend in friends">
+			<h2 data-ng-bind="friend.name"></h2>
+			<label data-ng-cloak><%= __('Married') %>
+				<input type="checkbox" disabled data-ng-model="friend.married">
+			</label>
+		</li>
+	</ul>
+</div>

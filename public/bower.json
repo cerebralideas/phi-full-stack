@@ -1,7 +1,0 @@
-{
-  "name": "phi-framework",
-  "dependencies": {
-    "requirejs": "~2.1.6",
-    "jquery": "1.9.1"
-  }
-}

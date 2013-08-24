@@ -1,0 +1,3 @@
+/*! phi-full-stack | Version: 0.0.1 | Minified on 2013-08-23 */
+
+!function(){"use strict";window.PHI={},requirejs.config({paths:{jquery:"/vendor-bower/jquery/jquery.min",modal:"/phi/ui-ix/extensions/modals/modal",tabs:"/phi/ui-ix/extensions/tabs/jquery.foundation.tabs",alerts:"/phi/ui-ix/extensions/alerts/jquery.foundation.alerts",core:"/phi/ui-ix/core/core"},shim:{modal:["jquery"],tabs:["jquery"],alerts:["jquery"],custom:["jquery"],core:["jquery"]}}),require([],function(){angular.module("FRIENDS").controller("FriendsCtrlr",["$scope","sectionData",function(a,b){a.friends=b.friends}]),angular.bootstrap(document,["FRIENDS"])})}();

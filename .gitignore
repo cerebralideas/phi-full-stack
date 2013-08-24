@@ -1,11 +1,45 @@
-# Ignore OS Files
-.DS_Store
+########################
+# node.js / npm
+########################
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
 
-# Ignore PHP and WebStorm Files
+pids
+logs
+results
+
+node_modules
+
+npm-debug.log
+
+
+########################
+# misc / editors
+########################
+*~
+*#
+.DS_STORE
+.netbeans
+nbproject
 .idea
 
-# Ignore Sass cache
+
+########################
+# local config
+########################
+config/local.js
+
+# Ignore IDE meta files
+.settings
+
+# Ignore Sass Cache
 .sass-cache
 
-# Ignore Node Modules
-node_modules
+# Ignore Managed Packages
+vendor-bower
