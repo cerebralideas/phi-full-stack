@@ -1,4 +1,4 @@
-/*! phi-full-stack | Version: 0.0.1 | Concatenated on 2013-08-23 */
+/*! phi-full-stack | Version: 0.0.1 | Concatenated on 2013-08-24 */
 
 (function () {
 
@@ -48,7 +48,6 @@
 
 					function FriendsCtrlr($scope, sectionData) {
 						$scope.friends = sectionData.friends;
-
 					}
 				]);
 

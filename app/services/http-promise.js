@@ -3,9 +3,9 @@
  * Promise Http Request
  */
 
-var Q = require('../node_modules/q');
+var Q = require('q');
 
-exports.httpPromise = {
+module.exports = {
 
 	query: function(hostname, path) {
 
@@ -21,7 +21,7 @@ exports.httpPromise = {
 					return request.
 							then(function(response) {
 								var data,
-									deffered = Q.defer();
+									deffered = new Q.defer();
 
 								response.body.forEach(function(chunk) {
 									data = chunk;

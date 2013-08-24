@@ -1,0 +1,39 @@
+<% layout('layout') -%>
+<script type="text/javascript">
+	angular.module('FRIENDS', []).factory('sectionData', [
+
+					function () {
+
+						'use strict';
+
+						var data = {};
+						data.friends = <%- friend %>[0];
+
+						return data;
+					}
+				]);
+</script>
+<div data-ng-controller="FriendsCtrlr">
+	<h1><a href="/"><%= __('Friends') %></a></h1>
+	<h2 data-ng-bind="friends.name"></h2>
+	<label data-ng-cloak><%= __('Married') %>
+		<input type="checkbox" disabled data-ng-model="friends.married">
+	</label>
+	<div data-ng-show="friends.sons">
+		<h3><%= __('Sons') %></h3>
+		<ul>
+			<li data-ng-repeat="son in friends.sons">
+				<p data-ng-bind-template="{{son.name}} : {{son.age}} years old"></p>
+			</li>
+		</ul>
+	</div>
+
+	<div data-ng-show="friends.daughters">
+		<h3><%= __('Daughters') %></h3>
+		<ul>
+			<li data-ng-repeat="daughter in friends.daughters">
+				<p data-ng-bind-template="{{daughter.name}} : {{daughter.age}} years old"></p>
+			</li>
+		</ul>
+	</div>
+</div>

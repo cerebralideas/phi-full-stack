@@ -46,7 +46,6 @@
 
 					function FriendsCtrlr($scope, sectionData) {
 						$scope.friends = sectionData.friends;
-
 					}
 				]);
 
