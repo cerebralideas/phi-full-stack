@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function (app) {
 
 	var controllerPath = '../app/controllers/',
 		friends = require(controllerPath + 'friendsCtrlr');

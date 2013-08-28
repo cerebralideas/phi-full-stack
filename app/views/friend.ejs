@@ -2,16 +2,16 @@
 <script type="text/javascript">
 	angular.module('FRIENDS', []).factory('sectionData', [
 
-					function () {
+		function () {
 
-						'use strict';
+			'use strict';
 
-						var data = {};
-						data.friends = <%- friend %>[0];
+			var data = {};
+			data.friends = <%- friend %>[0];
 
-						return data;
-					}
-				]);
+			return data;
+		}
+	]);
 </script>
 <div data-ng-controller="FriendsCtrlr">
 	<h1><a href="/"><%= __('Friends') %></a></h1>

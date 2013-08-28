@@ -12,7 +12,7 @@ module.exports = function (app) {
 	app.engine('ejs', engine);
 
 	// shared configurations
-	app.configure(function() {
+	app.configure(function () {
 
 		app.set('port', process.env.PORT || 3000);
 
@@ -35,7 +35,7 @@ module.exports = function (app) {
 	});
 
 	// dev specific configurations
-	app.configure('development', function() {
+	app.configure('development', function () {
 
 		// our exposed folder root is located at public/dev in development
 		app.use(express.static(path.join(rootPath, 'public/dev')));
@@ -44,7 +44,7 @@ module.exports = function (app) {
 
 
 	// production specific configurations
-	app.configure('production', function() {
+	app.configure('production', function () {
 
 		// our exposed folder root is located at public/dist in production
 		app.use(express.static(path.join(rootPath, 'public/dist')));

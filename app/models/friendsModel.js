@@ -1,5 +1,5 @@
-var Q = require('q');
-var httpPromise = require('../services/http-promise');
+var Q = require('q'),
+	httpPromise = require('../services/http-promise');
 
 module.exports = {
 
@@ -21,16 +21,17 @@ module.exports = {
 		]
 	},
 
-	find: function() {
+	find: function () {
 
-		return httpPromise.query('127.0.0.1', '/friends.json');
+		return httpPromise.query('/friends');
 	},
 
-	findOne: function(id) {
-		return httpPromise.query('127.0.0.1', '/friends.json').
-					then(function(friends) {
+	findOne: function (id) {
+
+		return httpPromise.query('/friends').
+					then(function (friends) {
 						var friend = JSON.parse(friends).
-										friends.filter(function(friend) {
+										friends.filter(function (friend) {
 											return friend.id == id;
 										}),
 							deffered = new Q.defer();
@@ -38,6 +39,5 @@ module.exports = {
 						deffered.resolve(JSON.stringify(friend));
 						return deffered.promise;
 					});
-		//return httpPromise.query('127.0.0.1', '/friends-1.json');
 	}
 }

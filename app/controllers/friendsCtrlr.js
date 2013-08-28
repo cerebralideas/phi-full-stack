@@ -1,10 +1,10 @@
-exports.index = function(req, res) {
+var Friends = require('../models/friendsModel');
 
-	var Friends = require('../models/friendsModel');
+exports.index = function (req, res) {
 
 		Friends.
 			find().
-			done(function(friends) {
+			done(function (friends) {
 
 				res.render('index', {
 					title: 'Friend Data',
@@ -14,18 +14,18 @@ exports.index = function(req, res) {
 
 };
 
-exports.friend = function(req, res) {
+exports.friend = function (req, res) {
 
-	var Friends = require('../models/friendsModel'),
-		id = req.params.id;
-		Friends.
-			findOne(id).
-			done(function(friend) {
+	var id = req.params.id;
 
-				res.render('friend', {
-					title: 'Friend Data',
-					friend: friend
-				});
+	Friends.
+		findOne(id).
+		done(function (friend) {
+
+			res.render('friend', {
+				title: 'Friend Data',
+				friend: friend
 			});
+		});
 
 };

@@ -1,6 +1,6 @@
-describe('Friends List', function() {
-	it("Gets Friends List JSON", function() {
+describe('Repeat', function () {
+	it('Should Repeat', function () {
 
-		expect("abc".repeat(2)).toEqual("abcabc");
+		expect('abc'.repeat(2)).toEqual('abcabc');
 	});
 });
