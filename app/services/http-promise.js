@@ -13,22 +13,22 @@ module.exports = {
 		var http = require('q-io/http'),
 			options = backend;
 
-			options.path = path + '.json'
+			options.path = path + '.json';
 
-			request = http.request(options);
-
-			return request.
+			return http.request(options).
 					then(function (response) {
-						var data,
-							deffered = new Q.defer();
+						var data;
 
 						response.body.forEach(function (chunk) {
 							data = chunk;
 						});
 
-						deffered.resolve(JSON.stringify(JSON.parse(data)));
-
-						return deffered.promise;
+						return Q.fcall(function() {
+							return JSON.stringify(JSON.parse(data));
+						});
+					},
+					function (error) {
+						console.log(error);
 					});
 		}
 	}
