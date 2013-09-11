@@ -1,7 +1,7 @@
 var Q = require('q'),
 	httpPromise = require('../services/http-promise');
 
-var obj = function () {
+var init = function () {
 
 	'use strict';
 
@@ -51,4 +51,4 @@ var obj = function () {
 	};
 };
 
-module.exports = obj();
+module.exports = init();

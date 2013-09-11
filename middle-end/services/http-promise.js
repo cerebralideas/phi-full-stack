@@ -6,7 +6,7 @@
 var Q = require('q'),
 	backend = require('../../config/backend');
 
-var obj = function () {
+var init = function () {
 
 	'use strict';
 
@@ -38,4 +38,4 @@ var obj = function () {
 	};
 };
 
-module.exports = obj();
+module.exports = init();

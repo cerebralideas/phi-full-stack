@@ -8,7 +8,7 @@ module.exports = function (app) {
 
 	'use strict';
 
-	var controllerPath = '../app/controllers/',
+	var controllerPath = '../middle-end/controllers/',
 		friends = require(controllerPath + 'ctrlr-friends');
 
 	app.get('/', friends.index);

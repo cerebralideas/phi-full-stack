@@ -1,4 +1,4 @@
-module.exports = function (app, i18n, rootPath) {
+module.exports = function (app, i18n, root) {
 
 	'use strict';
 
@@ -7,7 +7,7 @@ module.exports = function (app, i18n, rootPath) {
 	i18n.expressBind(app, {
 
 		locales: ['en', 'de'],
-		directory: rootPath + '/src/locales',
+		directory: root + '/front-end/locales',
 		extension: '.json'
 	});
 };

@@ -49,7 +49,7 @@ module.exports = function (app, passport) {
 		app.use(express.compress());
 
 		// Set views base path and engine
-		app.set('views', root + '/app/views');
+		app.set('views', root + '/middle-end/views');
 		app.set('view engine', 'ejs');
 
 		app.use(express.favicon());
@@ -104,14 +104,14 @@ module.exports = function (app, passport) {
 	// Dev specific configurations
 	app.configure('development', function () {
 
-		console.log(path.join(root, 'public/dev'));
+		console.log(path.join(root, '_public/dev'));
 
 		// set port
 		app.set('port', 8888);
 		app.set('securePort', 4430);
 
 		// our exposed folder root is located at public/dev in development
-		app.use(express.static(path.join(root, 'public/dev')));
+		app.use(express.static(path.join(root, '_public/dev')));
 		app.use(express.errorHandler());
 	});
 
@@ -119,11 +119,13 @@ module.exports = function (app, passport) {
 	// Production specific configurations
 	app.configure('production', function () {
 
+		console.log(path.join(root, '_public/dist'));
+
 		// set port
 		app.set('port', 80);
 		app.set('securePort', 443);
 
 		// our exposed folder root is located at public/dist in production
-		app.use(express.static(path.join(root, 'public/dist')));
+		app.use(express.static(path.join(root, '_public/dist')));
 	});
 };

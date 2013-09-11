@@ -14,7 +14,7 @@ var Express = require('express'),   // This is the lightweight routing/rendering
 	https = require('https'),       // Obvious
 	passport = require('passport'), // This is the de-facto authentication module
 	fs = require('fs'),             // File system module that allows for reading and writing to files
-	env = process.env.NODE_ENV;     // Should return 'development' on local and 'production' on live server
+	env = process.env.NODE_ENV || 'development';     // Should return 'development' on local and 'production' on live server
 
 
 /* TODO: This needs to be done to complete the SSL feature
@@ -39,7 +39,7 @@ http.createServer(app).listen(app.get('port'), function () {
 
 	'use strict';
 
-	console.log("Express server listening on port " + app.get('port'));
+	console.log("Express server listening on port " + app.get('port') + ' within a ' + env + ' environment.');
 
 	/* TODO: This should be used to help secure this app
 	// Strip user of access
@@ -54,7 +54,7 @@ https.createServer(options, app).listen(app.get('securePort'), function () {
 
 	'use strict';
 
-	console.log("Express server listening on secure port " + app.get('securePort'));
+	console.log("Express server listening on secure port " + app.get('securePort') + ' within a ' + env + 'environment.');
 
 	// TODO: This should be used to help secure this app
 	// Strip user of access
