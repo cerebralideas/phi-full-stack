@@ -1,6 +1,6 @@
 {
   "name": "phi-full-stack",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A server-side middle-end, and client-side web-app (and website) toolkit and modular framework",
   "private": true,
   "author": {
