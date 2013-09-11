@@ -50,7 +50,6 @@
 	"rhino"         : false,
 	"wsh"           : false,
 	"globals": {
-		"PAS": true,
 		"PHI": true,
 		"Modernizr": true,
 		"angular": true,

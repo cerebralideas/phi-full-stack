@@ -1,6 +1,7 @@
 ########################
 # node.js / npm
 ########################
+
 lib-cov
 *.seed
 *.log
@@ -22,6 +23,7 @@ npm-debug.log
 ########################
 # misc / editors
 ########################
+
 *~
 *#
 .DS_STORE
@@ -33,6 +35,7 @@ nbproject
 ########################
 # local config
 ########################
+
 config/local.js
 
 # Ignore IDE meta files

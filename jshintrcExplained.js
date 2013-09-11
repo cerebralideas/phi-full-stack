@@ -1,4 +1,4 @@
-{
+var jsExplained = {
 	// --------------------------------------------------------------------
 	// JSHint Configuration, Strict Edition
 	// --------------------------------------------------------------------
@@ -116,4 +116,4 @@
 		//"iLoveDouglas"
 	],
 	"indent"        : 4         // Specify indentation spacing
-}
+};

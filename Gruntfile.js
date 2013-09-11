@@ -1,4 +1,7 @@
-/*global module:false*/
+/**
+ * Grunt file for our task runner and build process
+ */
+
 module.exports = function(grunt) {
 
 	"use strict";
@@ -9,13 +12,12 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			dev: 'public/dev',
-			prod: 'public/dist'
+			dist: 'public/dist'
 		},
 		copy: {
 			src: [
 				'favicons/**/*',
 				'fonts/**/*',
-				'img/**/*',
 				'vendor-bower/**/*.js',
 				'vendor-manual/**/*.js',
 				'phi/ui-ix/**/*.js',
@@ -57,11 +59,14 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			files: [
-				'Gruntfile.js',
+				'*.js',
+				'app/**/*.js',
+				'config/**/*.js',
+				'test/**/*.js',
 				'src/js/**/*.js'
 			],
 			options: {
-				jshintrc: '.jshintrc' // Retrieves .jshintrc file from public/ See jshintrcExplained.js for more details
+				jshintrc: '.jshintrc'   // Retrieves .jshintrc file from public/ See jshintrcExplained.js for more details
 			}
 		},
 		uglify: {
@@ -70,12 +75,12 @@ module.exports = function(grunt) {
 						'Minified on <%= grunt.template.today("yyyy-mm-dd") %> */\n\n'
 			},
 			prod: {
-				expand: true,     // Enable dynamic expansion.
-				cwd: 'public/dev/js',      // Src matches are relative to this path.
-				src: ['**/*.js'], // Actual pattern(s) to match.
-				dest: 'public/dist/js',    // Destination path prefix.
-				ext: '.js',       // Dest filepaths will have this extension.
-				flatten: false    // Remove directory structure in destination
+				expand: true,           // Enable dynamic expansion.
+				cwd: 'public/dev/js',   // Src matches are relative to this path.
+				src: ['**/*.js'],       // Actual pattern(s) to match.
+				dest: 'public/dist/js', // Destination path prefix.
+				ext: '.js',             // Dest filepaths will have this extension.
+				flatten: false          // Remove directory structure in destination
 			}
 		},
 		compass: {
@@ -128,7 +133,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['jshint', 'jasmine']);
 
 	// Default dev tasks for grunt.
-	grunt.registerTask('default', ['test', 'clean:dev', 'concat',  'copy:dev', 'compass:dev' ]);//'macreload'
+	grunt.registerTask('default', ['clean:dev', 'concat',  'copy:dev', 'compass:dev']);
 
 	// Production build task.
 	grunt.registerTask('build', ['test', 'clean:prod', 'concat', 'copy:prod', 'uglify', 'compass:prod']);

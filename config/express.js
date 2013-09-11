@@ -1,53 +1,129 @@
-module.exports = function (app) {
-	var express = require('express'),
-		path = require('path'),
-		i18n = require('i18n-2'),
-		engine = require('ejs-locals'),
-		rootPath = path.normalize(__dirname + '/..');
+/**
+ * This is the Express config script.
+ *
+ * Require needed modules
+ * Set localization
+ * Set view engine
+ * Configure global settings
+ * Set security settings
+ * Set route module
+ * Set fall through for 404
+ * Set environment specific settings
+ *
+ * NOTE: For all the security things included below, including the absence of bodyParser()
+ * see this url below for my collection of security measures for Express:
+ *
+ * https://gist.github.com/cerebrl/6487587
+ */
 
-	// i18n config settings
-	require('./i18n')(app, i18n, rootPath);
+var express = require('express'),   // Import the Express framework
+	path = require('path'),         // Helps normalize/modify URI's
+	i18n = require('i18n-2'),       // See details at https://github.com/jeresig/i18n-node-2
+	helmet = require('helmet'),     // Module for securing headers: https://github.com/evilpacket/helmet
+	root = path.normalize(__dirname + '/..'); // Caches root path
 
-	// attach ejs as our view engine
-	app.engine('ejs', engine);
+module.exports = function (app, passport) {
 
-	// shared configurations
+	'use strict';
+
+	// LOCALIZATION
+	// Set i18n config settings
+	require('./i18n')(app, i18n, root);
+
+	// GLOBAL CONFIGURATIONS
 	app.configure(function () {
 
-		app.set('port', process.env.PORT || 3000);
+		// VIEW ENGINE
+		// Set ejs as our view engine
+		app.set('view engine', 'ejs');
 
-		// gzip everything
+		// Cookie parser should be above session
+		app.use(express.cookieParser());
+
+		// Use this instead of express.bodyParser(), which is not secure
+		// If .multipart() is needed, use it explicitly where needed
+		app.use(express.json());
+		app.use(express.urlencoded());
+
+		// Gzip everything
 		app.use(express.compress());
 
-		// set views base path and engine
-		app.set('views', rootPath + '/app/views');
+		// Set views base path and engine
+		app.set('views', root + '/app/views');
 		app.set('view engine', 'ejs');
 
 		app.use(express.favicon());
 
 		app.use(express.logger('dev'));
 
-		app.use(express.bodyParser());
+		// This is mostly not needed, but it allows for more
+		// of the HTTP verbs, rather than just GET and POST with
+		// traditional form actions.
 		app.use(express.methodOverride());
 
-		app.use(app.router);
+		/* TODO: This should be set, but causes issues
+		// SECURITY
+		// Lock down the security on this app
+		app.use(helmet.csp());
+		app.use(helmet.xframe());
+		app.use(helmet.iexss());
+		app.use(helmet.contentTypeOptions());
+		app.use(helmet.cacheControl());
+		*/
 
+		/* NOT IN USE RIGHT NOW; USED FOR MONGODB
+		// express/mongo session storage
+		app.use(express.session({
+			secret: 'MEAN',
+			store: new mongoStore({
+				url: config.db,
+				collection: 'sessions'
+			})
+		}));
+		*/
+
+		/* TODO: Should we use this?
+		// Prevent Cross-Site Request Forgery
+		app.use(express.csrf());
+		app.use(function (req, res, next) {
+			res.locals.csrftoken = req.session._csrf;
+			next();
+		});
+		*/
+
+		/* TODO: We will use passport for authentication
+		// Use passport session
+		app.use(passport.initialize());
+		app.use(passport.session());
+		*/
+
+		// EXPRESS ROUTES
+		app.use(app.router);
 	});
 
-	// dev specific configurations
+	// Dev specific configurations
 	app.configure('development', function () {
 
+		console.log(path.join(root, 'public/dev'));
+
+		// set port
+		app.set('port', 8888);
+		app.set('securePort', 4430);
+
 		// our exposed folder root is located at public/dev in development
-		app.use(express.static(path.join(rootPath, 'public/dev')));
+		app.use(express.static(path.join(root, 'public/dev')));
 		app.use(express.errorHandler());
 	});
 
 
-	// production specific configurations
+	// Production specific configurations
 	app.configure('production', function () {
 
-		// our exposed folder root is located at public/dist in production
-		app.use(express.static(path.join(rootPath, 'public/dist')));
-	});
+		// set port
+		app.set('port', 80);
+		app.set('securePort', 443);
 
-}
+		// our exposed folder root is located at public/dist in production
+		app.use(express.static(path.join(root, 'public/dist')));
+	});
+};

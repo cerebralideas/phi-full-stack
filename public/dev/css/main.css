@@ -3495,7 +3495,7 @@ div.progress.round .meter {
 .tooltipRight {
   bottom: auto;
   margin-left: 0;
-  top: -.75em;
+  top: -0.75em;
 }
 
 /* line 107, ../../../src/phi/ui-ix/extensions/overlay/_overlay.scss */
@@ -3518,7 +3518,7 @@ div.progress.round .meter {
   border-top: 0.5em solid rgba(0, 0, 0, 0.9);
   content: '';
   left: 50%;
-  margin-left: -.5em;
+  margin-left: -0.5em;
   position: absolute;
   top: 100%;
 }
@@ -3537,7 +3537,7 @@ div.progress.round .meter {
   border-bottom: .5em solid transparent;
   border-top: .5em solid transparent;
   margin-left: 0;
-  margin-top: -.5em;
+  margin-top: -0.5em;
   top: 50%;
 }
 

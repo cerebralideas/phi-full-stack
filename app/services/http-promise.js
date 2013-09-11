@@ -6,12 +6,16 @@
 var Q = require('q'),
 	backend = require('../../config/backend');
 
-module.exports = {
+var obj = function () {
 
-	query: function(path) {
+	'use strict';
 
-		var http = require('q-io/http'),
-			options = backend;
+	return {
+
+		query: function(path) {
+
+			var http = require('q-io/http'),
+				options = backend;
 
 			options.path = path + '.json';
 
@@ -31,4 +35,7 @@ module.exports = {
 						console.log(error);
 					});
 		}
-	}
+	};
+};
+
+module.exports = obj();

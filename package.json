@@ -1,6 +1,6 @@
 {
   "name": "phi-full-stack",
-  "version": "0.0.1",
+  "version": "0.2.2",
   "description": "A server-side middle-end, and client-side web-app (and website) toolkit and modular framework",
   "private": true,
   "author": {
@@ -21,8 +21,10 @@
     "q-io": "~1.9.4",
     "jasmine-node": "~1.11.0",
     "ejs": "~0.8.4",
-    "ejs-locals": "~1.0.2",
-    "i18n-2": "~0.4.5"
+    "i18n-2": "~0.4.5",
+    "helmet": "~0.1.0",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
