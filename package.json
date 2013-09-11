@@ -20,11 +20,7 @@
     "q": "~0.9.6",
     "q-io": "~1.9.4",
     "jasmine-node": "~1.11.0",
-    "ejs": "~0.8.4",
-    "i18n-2": "~0.4.5",
-    "helmet": "~0.1.0",
-    "passport": "~0.1.17",
-    "passport-local": "~0.1.6"
+    "ejs": "~0.8.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
