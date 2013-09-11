@@ -11,8 +11,8 @@ module.exports = function(grunt) {
 
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
-			dev: 'public/dev',
-			dist: 'public/dist'
+			dev: '_public/dev',
+			dist: '_public/dist'
 		},
 		copy: {
 			src: [
@@ -25,15 +25,15 @@ module.exports = function(grunt) {
 			],
 			dev: {
 				src: '<%= copy.src %>',
-				dest: 'public/dev',
+				dest: '_public/dev',
 				expand: true,
-				cwd: './src'
+				cwd: './front-end'
 			},
 			prod: {
 				src: '<%= copy.src %>',
-				dest: 'public/dist',
+				dest: '_public/dist',
 				expand: true,
-				cwd: './src'
+				cwd: './front-end'
 			}
 		},
 		concat: {
@@ -43,8 +43,8 @@ module.exports = function(grunt) {
 				separator: '\n\n;// End of file\n\n'
 			},
 			main: {
-				src: 'src/js/*.js',
-				dest: 'public/dev/js/main.js'
+				src: 'front-end/js/*.js',
+				dest: '_public/dev/js/main.js'
 			}
 		},
 		watch: {
@@ -53,20 +53,20 @@ module.exports = function(grunt) {
 				tasks: ['jshint', 'concat', 'macreload']
 			},
 			scss: {
-				files: 'src/sass/*.scss',
+				files: 'front-end/sass/*.scss',
 				tasks: ['compass:dev', 'macreload']
 			}
 		},
 		jshint: {
 			files: [
 				'*.js',
-				'app/**/*.js',
+				'middle-end/**/*.js',
 				'config/**/*.js',
 				'test/**/*.js',
-				'src/js/**/*.js'
+				'front-end/js/**/*.js'
 			],
 			options: {
-				jshintrc: '.jshintrc'   // Retrieves .jshintrc file from public/ See jshintrcExplained.js for more details
+				jshintrc: '.jshintrc'   // Retrieves .jshintrc file from _public/ See jshintrcExplained.js for more details
 			}
 		},
 		uglify: {
@@ -76,9 +76,9 @@ module.exports = function(grunt) {
 			},
 			prod: {
 				expand: true,           // Enable dynamic expansion.
-				cwd: 'public/dev/js',   // Src matches are relative to this path.
+				cwd: '_public/dev/js',   // Src matches are relative to this path.
 				src: ['**/*.js'],       // Actual pattern(s) to match.
-				dest: 'public/dist/js', // Destination path prefix.
+				dest: '_public/dist/js', // Destination path prefix.
 				ext: '.js',             // Dest filepaths will have this extension.
 				flatten: false          // Remove directory structure in destination
 			}
@@ -86,15 +86,15 @@ module.exports = function(grunt) {
 		compass: {
 			prod: {
 				options: {
-					sassDir: 'src/sass',
-					cssDir: 'public/dist/css',
+					sassDir: 'front-end/sass',
+					cssDir: '_public/dist/css',
 					environment: 'production'
 				}
 			},
 			dev: {
 				options: {
-					sassDir: 'src/sass',
-					cssDir: 'public/dev/css'
+					sassDir: 'front-end/sass',
+					cssDir: '_public/dev/css'
 				}
 			}
 		},

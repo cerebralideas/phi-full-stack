@@ -28,7 +28,7 @@ var init = function () {
 						});
 
 						return Q.fcall(function() {
-							return JSON.stringify(JSON.parse(data));
+							return data;
 						});
 					},
 					function (error) {
